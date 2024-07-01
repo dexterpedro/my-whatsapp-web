@@ -295,7 +295,12 @@ class Message extends Base {
             this.allowMultipleAnswers = Boolean(!data.pollSelectableOptionsCount);
             this.pollInvalidated = data.pollInvalidated;
             this.isSentCagPollCreation = data.isSentCagPollCreation;
-            this.messageSecret = Object.keys(data.messageSecret).map((key) =>  data.messageSecret[key]);
+
+            delete this._data.pollName;
+            delete this._data.pollOptions;
+            delete this._data.pollSelectableOptionsCount;
+            delete this._data.pollInvalidated;
+            delete this._data.isSentCagPollCreation;
         }
 
         return super._patch(data);
